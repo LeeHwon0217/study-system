@@ -1,0 +1,418 @@
+/* StudyWrite.css - 스터디 개설/수정 스타일 */
+
+/* BoardWrite.css의 기본 스타일을 상속받으면서 스터디 특화 스타일 적용 */
+
+/* 컨테이너 특별 스타일 - 스터디 테마 */
+.board-write-container {
+  background: linear-gradient(135deg, #10b981 0%, #059669 50%, #047857 100%);
+}
+
+.board-write-card {
+  background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 100%);
+  border: 2px solid #10b981;
+  position: relative;
+}
+
+.board-write-card::before {
+  background: linear-gradient(90deg, #10b981 0%, #059669 50%, #047857 100%);
+}
+
+/* 헤더 특별 스타일 */
+.board-write-title {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.board-write-title.create::after {
+  content: "🚀";
+  position: absolute;
+  right: -3rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2rem;
+  animation: rocket 3s ease-in-out infinite;
+}
+
+.board-write-title.edit::after {
+  content: "⚙️";
+  position: absolute;
+  right: -3rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2rem;
+  animation: rotate 4s linear infinite;
+}
+
+@keyframes rocket {
+  0%,
+  100% {
+    transform: translateY(-50%) translateX(0);
+  }
+  50% {
+    transform: translateY(-50%) translateX(5px);
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: translateY(-50%) rotate(0deg);
+  }
+  to {
+    transform: translateY(-50%) rotate(360deg);
+  }
+}
+
+/* 폼 라벨 특별 스타일 */
+.board-write-form .form-group label {
+  color: #064e3b;
+  font-weight: 700;
+  font-size: 1rem;
+  margin-bottom: 0.75rem;
+  display: block;
+  position: relative;
+  padding-left: 2rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.board-write-form .form-group:nth-child(1) label::before {
+  content: "📝";
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 1.25rem;
+}
+
+.board-write-form .form-group:nth-child(2) label::before {
+  content: "📄";
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 1.25rem;
+}
+
+.board-write-form .form-group:nth-child(3) label::before {
+  content: "👥";
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 1.25rem;
+}
+
+.board-write-form .form-group:nth-child(4) label::before {
+  content: "📅";
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 1.25rem;
+}
+
+/* 입력 필드 특별 스타일 */
+.board-write-form input,
+.board-write-form textarea {
+  border: 2px solid #d1fae5;
+  background: rgba(240, 253, 244, 0.5);
+  color: #064e3b;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.board-write-form input:focus,
+.board-write-form textarea:focus {
+  border-color: #10b981;
+  background: white;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+  transform: translateY(-2px);
+}
+
+.board-write-form input:not(:placeholder-shown),
+.board-write-form textarea:not(:placeholder-shown) {
+  border-color: #059669;
+  background: rgba(220, 252, 231, 0.8);
+}
+
+.board-write-form input::placeholder,
+.board-write-form textarea::placeholder {
+  color: #6b7280;
+  font-style: italic;
+}
+
+/* 숫자 입력 필드 특별 스타일 */
+.board-write-form input[type="number"] {
+  position: relative;
+}
+
+.board-write-form input[type="number"]::-webkit-outer-spin-button,
+.board-write-form input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.board-write-form input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* 날짜 입력 필드 특별 스타일 */
+.board-write-form input[type="date"] {
+  position: relative;
+  cursor: pointer;
+}
+
+.board-write-form input[type="date"]::-webkit-calendar-picker-indicator {
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="%2310b981"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/></svg>')
+    no-repeat;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+.board-write-form input[type="date"]::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
+}
+
+/* 텍스트 영역 특별 스타일 */
+.board-write-form textarea {
+  min-height: 150px;
+  resize: vertical;
+  line-height: 1.6;
+}
+
+/* 제출 버튼 특별 스타일 */
+.form-actions .submit-button {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.form-actions .submit-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.form-actions .submit-button:hover:not(:disabled) {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 15px -3px rgba(16, 185, 129, 0.4);
+}
+
+.form-actions .submit-button:hover:not(:disabled)::before {
+  left: 100%;
+}
+
+.form-actions .submit-button:disabled {
+  background: linear-gradient(135deg, #9ca3af 0%, #6b7280 100%);
+  box-shadow: none;
+}
+
+/* 로딩 오버레이 특별 스타일 */
+.loading-overlay {
+  background: rgba(240, 253, 244, 0.95);
+  backdrop-filter: blur(8px);
+}
+
+.loading-content {
+  color: #064e3b;
+  font-weight: 600;
+}
+
+.loading-spinner {
+  border-color: #d1fae5;
+  border-top-color: #10b981;
+}
+
+/* 메시지 특별 스타일 */
+.message.success {
+  background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+  color: #064e3b;
+  border: 2px solid #10b981;
+}
+
+.message.error {
+  background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+  color: #991b1b;
+  border: 2px solid #ef4444;
+}
+
+/* 폼 그룹 애니메이션 */
+.board-write-form .form-group {
+  animation: slideInUp 0.6s ease-out;
+  animation-fill-mode: both;
+}
+
+.board-write-form .form-group:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.board-write-form .form-group:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.board-write-form .form-group:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.board-write-form .form-group:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .board-write-title.create::after,
+  .board-write-title.edit::after {
+    right: -2.5rem;
+    font-size: 1.5rem;
+  }
+
+  .board-write-form .form-group label {
+    font-size: 0.875rem;
+    padding-left: 1.75rem;
+  }
+
+  .board-write-form .form-group label::before {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .board-write-title.create::after,
+  .board-write-title.edit::after {
+    display: none;
+  }
+
+  .board-write-form .form-group label {
+    padding-left: 1.5rem;
+  }
+
+  .board-write-form .form-group label::before {
+    font-size: 0.875rem;
+  }
+}
+
+/* 접근성 개선 */
+.board-write-form input:focus,
+.board-write-form textarea:focus,
+.form-actions .submit-button:focus {
+  outline: 2px solid #10b981;
+  outline-offset: 2px;
+}
+
+/* 다크모드 지원 */
+@media (prefers-color-scheme: dark) {
+  .board-write-container {
+    background: linear-gradient(135deg, #064e3b 0%, #065f46 50%, #047857 100%);
+  }
+
+  .board-write-card {
+    background: linear-gradient(135deg, #1f2937 0%, #1a2e1a 100%);
+    border-color: #10b981;
+  }
+
+  .board-write-title {
+    color: #d1fae5;
+  }
+
+  .board-write-form .form-group label {
+    color: #d1fae5;
+  }
+
+  .board-write-form input,
+  .board-write-form textarea {
+    background: rgba(34, 84, 61, 0.5);
+    border-color: #22543d;
+    color: #d1fae5;
+  }
+
+  .board-write-form input:focus,
+  .board-write-form textarea:focus {
+    background: rgba(26, 46, 26, 0.8);
+  }
+
+  .board-write-form input:not(:placeholder-shown),
+  .board-write-form textarea:not(:placeholder-shown) {
+    background: rgba(34, 84, 61, 0.8);
+  }
+
+  .board-write-form input::placeholder,
+  .board-write-form textarea::placeholder {
+    color: #9ca3af;
+  }
+
+  .loading-overlay {
+    background: rgba(26, 46, 26, 0.95);
+  }
+
+  .loading-content {
+    color: #d1fae5;
+  }
+
+  .loading-spinner {
+    border-color: #22543d;
+    border-top-color: #10b981;
+  }
+}
+
+/* 특별한 효과 */
+.board-write-card {
+  animation: cardEntrance 0.8s ease-out;
+}
+
+@keyframes cardEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* 제출 버튼 특별 효과 */
+.form-actions .submit-button:not(:disabled) {
+  animation: buttonGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes buttonGlow {
+  from {
+    box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.3);
+  }
+  to {
+    box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.3), 0 0 20px rgba(16, 185, 129, 0.2);
+  }
+}
+
+/* 입력 필드 포커스 효과 개선 */
+.board-write-form input:focus,
+.board-write-form textarea:focus {
+  animation: focusPulse 0.3s ease-out;
+}
+
+@keyframes focusPulse {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-1px) scale(1.01);
+  }
+  100% {
+    transform: translateY(-2px) scale(1);
+  }
+}

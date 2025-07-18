@@ -1,0 +1,200 @@
+/* globals.css - 전체 프로젝트 공통 CSS 변수 및 기본 스타일 */
+
+:root {
+  /* 색상 시스템 (라이트 모드) */
+  --color-primary: #667eea; /* 주요 액션, 강조 */
+  --color-primary-dark: #764ba2; /* 주요 액션 호버/활성 */
+  --color-secondary: #4a5568; /* 보조 텍스트, 아이콘 */
+  --color-success: #10b981; /* 성공 메시지, 긍정적 액션 */
+  --color-error: #ef4444; /* 에러 메시지, 부정적 액션 */
+  --color-warning: #f59e0b; /* 경고 메시지 */
+
+  /* 배경 색상 (라이트 모드) */
+  --color-background-light: #fafafa; /* 페이지 배경 */
+  --color-background-card: #ffffff; /* 카드, 모달 배경 */
+  --color-background-muted: #f8fafc; /* 섹션 배경, 입력 필드 기본 */
+  --color-background-accent: #e2e8f0; /* 강조 배경, 구분선 */
+
+  /* 텍스트 색상 (라이트 모드) */
+  --color-text-primary: #1a202c; /* 제목, 주요 텍스트 */
+  --color-text-secondary: #4a5568; /* 본문, 일반 텍스트 */
+  --color-text-muted: #64748b; /* 보조 텍스트, 플레이스홀더 */
+
+  /* 테두리 및 그림자 */
+  --color-border: #e2e8f0; /* 일반 테두리 */
+  --color-border-dark: #cbd5e0; /* 강조 테두리 */
+  --border-radius-sm: 8px;
+  --border-radius-md: 12px;
+  --border-radius-lg: 16px;
+  --border-radius-xl: 24px;
+  --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+
+  /* 애니메이션 */
+  --transition-ease: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-linear: all 0.2s linear;
+}
+
+/* 다크 모드 */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* 색상 시스템 (다크 모드) */
+    --color-primary: #667eea;
+    --color-primary-dark: #764ba2;
+    --color-secondary: #a0aec0;
+    --color-success: #10b981;
+    --color-error: #ef4444;
+    --color-warning: #f59e0b;
+
+    /* 배경 색상 (다크 모드) */
+    --color-background-light: #1a202c;
+    --color-background-card: #2d3748;
+    --color-background-muted: #4a5568;
+    --color-background-accent: #718096;
+
+    /* 텍스트 색상 (다크 모드) */
+    --color-text-primary: #f7fafc;
+    --color-text-secondary: #e2e8f0;
+    --color-text-muted: #cbd5e0;
+
+    /* 테두리 및 그림자 (다크 모드) */
+    --color-border: #4a5568;
+    --color-border-dark: #718096;
+  }
+}
+
+/* 기본 스타일 리셋 */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--color-background-light);
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+
+/* 스크롤바 스타일링 */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-background-light);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-secondary);
+}
+
+/* 포커스 스타일 통일 */
+*:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* 링크 기본 스타일 */
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: var(--transition-ease);
+}
+
+a:hover {
+  color: var(--color-primary-dark);
+}
+
+/* 버튼 기본 스타일 리셋 */
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  padding: 0;
+  color: inherit;
+}
+
+/* 입력 필드 기본 스타일 */
+input,
+textarea {
+  font-family: inherit;
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-md);
+  padding: 0.75rem 1rem;
+  background-color: var(--color-background-card);
+  color: var(--color-text-primary);
+  transition: var(--transition-ease);
+  outline: none;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--color-text-muted);
+}
+
+input:focus,
+textarea:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1); /* Primary color with opacity */
+}
+
+/* 유틸리티 클래스 */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.mb-0 {
+  margin-bottom: 0;
+}
+.mb-1 {
+  margin-bottom: 0.25rem;
+}
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
+.mb-3 {
+  margin-bottom: 0.75rem;
+}
+.mb-4 {
+  margin-bottom: 1rem;
+}
+.mt-0 {
+  margin-top: 0;
+}
+.mt-1 {
+  margin-top: 0.25rem;
+}
+.mt-2 {
+  margin-top: 0.5rem;
+}
+.mt-3 {
+  margin-top: 0.75rem;
+}
+.mt-4 {
+  margin-top: 1rem;
+}

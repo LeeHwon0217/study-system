@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.koreait.restapi.mapper.MemberMapper">
+
+    <insert id="save" parameterType="MemberDTO">
+        INSERT INTO member (username, password, name)
+        VALUES (#{username}, #{password}, #{name})
+    </insert>
+
+    <select id="findByUsername" resultType="com.koreait.restapi.dto.MemberDTO">
+        select * from member where username=#{username}
+    </select>
+
+    <update id="update" parameterType="com.koreait.restapi.dto.MemberDTO">
+        UPDATE member
+        SET <if test="password != null and password != ''">
+                password = #{password},
+            </if>
+        name = #{name}
+        where id = #{id}
+    </update>
+</mapper>

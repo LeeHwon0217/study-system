@@ -1,0 +1,373 @@
+/* MyStudyList.css - 내가 개설한 스터디 목록 스타일 */
+
+/* BoardList.css의 기본 스타일을 상속받으면서 추가 스타일 적용 */
+
+/* 제목 특별 스타일 - 개설한 스터디임을 강조 */
+.board-container .board-title {
+  position: relative;
+  padding-left: 3rem;
+}
+
+.board-container .board-title::before {
+  content: "👨‍💼";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2.5rem;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+/* 스터디 아이템 특별 스타일 - 내가 만든 스터디임을 강조 */
+.board-container .post-item {
+  position: relative;
+  border-left: 6px solid transparent;
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  border-image: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%) 1;
+}
+
+.board-container .post-item::after {
+  content: "👑";
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 1.5rem;
+  opacity: 0.7;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+}
+
+.board-container .post-item:hover {
+  background: linear-gradient(135deg, #ffffff 0%, #f0f9ff 100%);
+  border-image: linear-gradient(135deg, #0284c7 0%, #0369a1 100%) 1;
+  transform: translateX(8px) translateY(-2px);
+  box-shadow: 0 8px 15px -3px rgba(2, 132, 199, 0.2);
+}
+
+.board-container .post-item:hover::after {
+  opacity: 1;
+  transform: scale(1.1);
+  transition: all 0.3s ease;
+}
+
+/* 메타 정보 스타일 개선 */
+.board-container .post-meta {
+  background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+  border-left: 4px solid #0ea5e9;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.board-container .post-meta span {
+  color: #0c4a6e;
+  font-weight: 600;
+}
+
+.board-container .post-meta span:first-child::before {
+  content: "👥";
+  margin-right: 0.5rem;
+}
+
+.board-container .post-meta span:last-child::before {
+  content: "⏰";
+  margin-right: 0.5rem;
+}
+
+/* 페이지네이션 스타일 */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 3rem;
+  padding: 2rem 0;
+  border-top: 2px solid #e1e5e9;
+}
+
+.pagination button {
+  min-width: 48px;
+  height: 48px;
+  border: 2px solid #e2e8f0;
+  background: white;
+  color: #64748b;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.pagination button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(14, 165, 233, 0.1), transparent);
+  transition: left 0.5s;
+}
+
+.pagination button:hover:not(:disabled) {
+  border-color: #0ea5e9;
+  color: #0c4a6e;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px -1px rgba(14, 165, 233, 0.2);
+}
+
+.pagination button:hover:not(:disabled)::before {
+  left: 100%;
+}
+
+.pagination button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.pagination button.active-page {
+  background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+  color: white;
+  border-color: #0284c7;
+  box-shadow: 0 4px 6px -1px rgba(14, 165, 233, 0.3);
+  transform: scale(1.1);
+}
+
+.pagination button.active-page::after {
+  content: "✓";
+  position: absolute;
+  top: -0.25rem;
+  right: -0.25rem;
+  width: 1rem;
+  height: 1rem;
+  background: #10b981;
+  color: white;
+  border-radius: 50%;
+  font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.pagination button.active-page:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 10px -2px rgba(14, 165, 233, 0.4);
+}
+
+/* 빈 상태 특별 스타일 */
+.board-container .empty-state {
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  border: 2px dashed #0ea5e9;
+  color: #0c4a6e;
+  position: relative;
+}
+
+.board-container .empty-state::before {
+  content: "📚";
+  display: block;
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  opacity: 0.7;
+}
+
+.board-container .empty-state::after {
+  content: "스터디를 개설해보세요!";
+  display: block;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+  opacity: 0.8;
+}
+
+/* 로딩 상태 특별 스타일 */
+.board-container .loading-indicator {
+  background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+  color: white;
+  position: relative;
+}
+
+.board-container .loading-indicator::before {
+  content: "📋";
+  margin-right: 0.5rem;
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+/* 에러 메시지 특별 스타일 */
+.board-container .error-message {
+  background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+  border: 2px solid #f87171;
+  color: #991b1b;
+  position: relative;
+}
+
+.board-container .error-message::before {
+  content: "😵‍💫";
+  margin-right: 0.5rem;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .board-container .board-title {
+    font-size: 1.75rem;
+    padding-left: 2.5rem;
+  }
+
+  .board-container .board-title::before {
+    font-size: 2rem;
+  }
+
+  .pagination {
+    gap: 0.25rem;
+    flex-wrap: wrap;
+  }
+
+  .pagination button {
+    min-width: 40px;
+    height: 40px;
+    font-size: 0.875rem;
+  }
+
+  .board-container .post-item::after {
+    font-size: 1.25rem;
+    top: 0.75rem;
+    right: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .board-container .board-title {
+    font-size: 1.5rem;
+    padding-left: 2rem;
+    text-align: center;
+  }
+
+  .board-container .board-title::before {
+    font-size: 1.5rem;
+    left: 50%;
+    top: -2rem;
+    transform: translateX(-50%);
+  }
+
+  .pagination button {
+    min-width: 36px;
+    height: 36px;
+    font-size: 0.75rem;
+  }
+
+  .board-container .post-meta {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+
+/* 접근성 개선 */
+.pagination button:focus {
+  outline: 2px solid #0ea5e9;
+  outline-offset: 2px;
+}
+
+/* 다크모드 지원 */
+@media (prefers-color-scheme: dark) {
+  .board-container .post-item {
+    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+    border-image: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%) 1;
+  }
+
+  .board-container .post-item:hover {
+    background: linear-gradient(135deg, #334155 0%, #475569 100%);
+  }
+
+  .board-container .post-meta {
+    background: linear-gradient(135deg, #334155 0%, #475569 100%);
+    border-color: #0ea5e9;
+  }
+
+  .board-container .post-meta span {
+    color: #e2e8f0;
+  }
+
+  .pagination button {
+    background: #374151;
+    border-color: #4b5563;
+    color: #d1d5db;
+  }
+
+  .pagination button:hover:not(:disabled) {
+    border-color: #0ea5e9;
+    color: #f3f4f6;
+  }
+
+  .board-container .empty-state {
+    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+    border-color: #0ea5e9;
+    color: #e2e8f0;
+  }
+}
+
+/* 특별한 애니메이션 효과 */
+.board-container .post-item {
+  animation: slideInRight 0.6s ease-out;
+  animation-fill-mode: both;
+}
+
+.board-container .post-item:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.board-container .post-item:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.board-container .post-item:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.board-container .post-item:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+.board-container .post-item:nth-child(5) {
+  animation-delay: 0.5s;
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.pagination {
+  animation: fadeInUp 0.6s ease-out 0.6s both;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

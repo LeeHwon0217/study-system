@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.koreait.restapi.mapper.StudyMapper">
+
+    <!-- 스터디 등록 -->
+    <insert id="insertStudy" parameterType="com.koreait.restapi.dto.StudyDTO" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO study (title, description, max_members, deadline, creator_id)
+        VALUES (#{title}, #{description}, #{maxMembers}, #{deadline}, #{creatorId})
+    </insert>
+
+    <!-- 전체 스터디 목록 (페이징) -->
+    <select id="getStudyList" resultType="com.koreait.restapi.dto.StudyDTO">
+        SELECT s.*, m.name AS creatorName
+        FROM study s
+                 JOIN member m ON s.creator_id = m.id
+        ORDER BY s.created_at DESC
+            LIMIT #{size} OFFSET #{offset}
+    </select>
+
+    <!-- 스터디 총 개수 -->
+    <select id="getStudyCount" resultType="int">
+        SELECT COUNT(*) FROM study
+    </select>
+
+    <!-- 스터디 상세 조회 -->
+    <select id="getStudyById" parameterType="int" resultType="com.koreait.restapi.dto.StudyDTO">
+        SELECT s.*, m.name AS creatorName
+        FROM study s
+                 JOIN member m ON s.creator_id = m.id
+        WHERE s.id = #{id}
+    </select>
+
+    <!-- 내가 만든 스터디 목록 -->
+    <select id="getStudiesByWriterId" parameterType="int" resultType="com.koreait.restapi.dto.StudyDTO">
+        SELECT s.*, m.name AS creatorName
+        FROM study s
+                 JOIN member m ON s.creator_id = m.id
+        WHERE s.creator_id = #{writerId}
+        ORDER BY s.created_at DESC
+    </select>
+
+    <!-- 스터디 신청 -->
+    <insert id="applyStudy" parameterType="com.koreait.restapi.dto.StudyApplicationDTO">
+        INSERT INTO study_application (member_id, study_id)
+        VALUES (#{memberId}, #{studyId})
+    </insert>
+
+    <!-- 중복 신청 여부 확인 -->
+    <select id="countApplication" resultType="int">
+        SELECT COUNT(*) FROM study_application
+        WHERE study_id = #{studyId} AND member_id = #{memberId}
+    </select>
+
+    <!-- 내가 신청한 스터디 목록 -->
+    <select id="getAppliedStudiesByMemberId" parameterType="int" resultType="com.koreait.restapi.dto.StudyDTO">
+        SELECT s.*, m.name AS creatorName
+        FROM study_application a
+                 JOIN study s ON a.study_id = s.id
+                 JOIN member m ON s.creator_id = m.id
+        WHERE a.member_id = #{memberId}
+        ORDER BY a.applied_at DESC
+    </select>
+
+    <!-- 모집 인원 초과 확인 -->
+    <select id="countApplicants" resultType="int">
+        SELECT COUNT(*) FROM study_application
+        WHERE study_id = #{studyId}
+    </select>
+
+    <!-- 스터디 수정 -->
+    <update id="updateStudy" parameterType="com.koreait.restapi.dto.StudyDTO">
+        UPDATE study
+        SET
+            title = #{title},
+            description = #{description},
+            max_members = #{maxMembers},
+            deadline = #{deadline}
+        WHERE id = #{id} AND creator_id = #{creatorId}
+    </update>
+
+    <!-- 내가 만든 스터디 (페이징) -->
+    <select id="getMyStudiesByPaging" resultType="com.koreait.restapi.dto.StudyDTO">
+        SELECT * FROM study
+        WHERE creator_id = #{memberId}
+        ORDER BY created_at DESC
+            LIMIT #{size} OFFSET #{offset}
+    </select>
+
+    <!-- 내가 만든 스터디 개수 -->
+    <select id="getMyStudyCount" resultType="int">
+        SELECT COUNT(*) FROM study WHERE creator_id = #{memberId}
+    </select>
+
+    <!-- ✅ 게시글 검색 (제목 or 내용, 페이징 포함) -->
+    <select id="searchStudies" resultType="com.koreait.restapi.dto.StudyDTO">
+        SELECT * FROM study
+        WHERE title LIKE CONCAT('%', #{keyword}, '%')
+           OR description LIKE CONCAT('%', #{keyword}, '%')
+        ORDER BY created_at DESC
+            LIMIT #{size} OFFSET #{offset}
+    </select>
+
+    <!-- ✅ 검색 결과 총 개수 -->
+    <select id="getSearchCount" resultType="int">
+        SELECT COUNT(*) FROM study
+        WHERE title LIKE CONCAT('%', #{keyword}, '%')
+           OR description LIKE CONCAT('%', #{keyword}, '%')
+    </select>
+
+</mapper>

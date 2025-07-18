@@ -1,0 +1,647 @@
+/* StudyList.css - 스터디 모집 게시판 스타일 */
+
+/* BoardList.css와 MyStudyList.css의 기본 스타일을 상속받으면서 추가 스타일 적용 */
+
+/* 제목 특별 스타일 - 스터디 모집임을 강조 */
+.board-container .board-title {
+  position: relative;
+  padding-left: 3.5rem;
+}
+
+.board-container .board-title::before {
+  content: "📢";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2.5rem;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+  animation: pulse 3s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: translateY(-50%) scale(1);
+  }
+  50% {
+    transform: translateY(-50%) scale(1.1);
+  }
+}
+
+/* 스터디 개설 버튼 특별 스타일 */
+.board-container .write-button {
+  background: linear-gradient(135deg, var(--color-success) 0%, #059669 100%);
+  color: white;
+  border: none;
+  padding: 1rem 2.5rem; /* 버튼 크기 증가 */
+  border-radius: var(--border-radius-md);
+  font-size: 1.125rem; /* 폰트 크기 증가 */
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-ease);
+  box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.board-container .write-button::before {
+  content: "🚀";
+  margin-right: 0.5rem;
+}
+
+.board-container .write-button:hover {
+  box-shadow: 0 8px 15px -3px rgba(16, 185, 129, 0.4);
+  transform: translateY(-2px) scale(1.02);
+}
+
+/* 검색 바 스타일 */
+.search-bar {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, var(--color-background-muted) 0%, var(--color-background-accent) 100%);
+  border-radius: var(--border-radius-lg);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.search-bar::before {
+  content: "🔍";
+  font-size: 1.5rem;
+  color: var(--color-secondary);
+}
+
+.search-input {
+  flex-grow: 1;
+  padding: 0.875rem 1.25rem;
+  border: 2px solid var(--color-border);
+  border-radius: var(--border-radius-md);
+  font-size: 1rem;
+  background: var(--color-background-card);
+  color: var(--color-text-primary);
+  transition: var(--transition-ease);
+}
+
+.search-input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  background: white;
+}
+
+.search-input::placeholder {
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+/* 스터디 아이템 특별 스타일 */
+.board-container .posts-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid; /* Grid layout for better presentation */
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Responsive grid */
+}
+
+.board-container .post-item {
+  position: relative;
+  border-left: 6px solid transparent;
+  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); /* Light green gradient */
+  border-image: linear-gradient(135deg, var(--color-success) 0%, #059669 100%) 1;
+  transition: var(--transition-ease);
+  border-radius: var(--border-radius-lg); /* Rounded corners for items */
+  padding: 1.5rem;
+  box-shadow: var(--shadow-md);
+  cursor: pointer;
+}
+
+.board-container .post-item::after {
+  content: "📚";
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 1.5rem;
+  opacity: 0.6;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+  transition: var(--transition-ease);
+}
+
+.board-container .post-item:hover {
+  background: linear-gradient(135deg, var(--color-background-card) 0%, #f0fdf4 100%);
+  border-image: linear-gradient(135deg, #059669 0%, #047857 100%) 1; /* Fixed gradient */
+  transform: translateY(-4px); /* Lift effect on hover */
+  box-shadow: 0 8px 15px -3px rgba(16, 185, 129, 0.2);
+}
+
+.board-container .post-item:hover::after {
+  opacity: 1;
+  transform: scale(1.1) rotate(5deg);
+}
+
+.board-container .post-title {
+  font-size: 1.375rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin: 0 0 1rem 0;
+  line-height: 1.4; /* Added line-height */
+  word-break: keep-all;
+}
+
+/* 메타 정보 스타일 개선 */
+.board-container .post-meta {
+  background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+  border-left: 4px solid var(--color-success);
+  padding: 1rem;
+  border-radius: var(--border-radius-sm);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  font-size: 0.875rem;
+  color: #064e3b;
+}
+
+.board-container .post-meta span {
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.board-container .post-meta span:first-child::before {
+  content: "👨‍🏫";
+  font-size: 1rem;
+}
+
+.board-container .post-meta span:nth-child(2)::before {
+  content: "👥";
+  font-size: 1rem;
+}
+
+.board-container .post-meta span:last-child::before {
+  content: "⏰";
+  font-size: 1rem;
+}
+
+/* 모달 특별 스타일 */
+/* 모달 오버레이는 BoardList.css에서 z-index: 1000으로 설정되어 상속됨 */
+
+/* 모달 스타일 */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999; /* 모달 오버레이가 항상 최상단에 오도록 매우 높게 설정 */
+  padding: 1rem;
+  backdrop-filter: blur(4px);
+  animation: fadeIn 0.3s ease;
+}
+
+.modal-content {
+  background: linear-gradient(135deg, var(--color-background-card) 0%, #f0fdf4 100%);
+  border: 2px solid var(--color-success);
+  border-radius: var(--border-radius-xl);
+  max-width: 450px; /* 모달 너비 감소 */
+  max-height: 70vh; /* 모달 높이 감소 */
+  width: 100%;
+  overflow-y: auto;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  animation: slideUp 0.3s ease;
+  position: relative; /* Portal 내부에서 올바른 컨텍스트를 위해 유지 */
+  /* z-index는 modal-overlay에서 충분히 높게 설정되었으므로 여기서는 필요 없음 */
+}
+
+.board-container .modal-content .modal-title {
+  color: #064e3b;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #dcfce7;
+  position: relative;
+}
+
+.board-container .modal-content .modal-title::before {
+  content: "📚";
+  margin-right: 0.5rem;
+}
+
+.board-container .modal-content .modal-content-text {
+  color: #065f46;
+  line-height: 1.6;
+  margin-bottom: 0.75rem;
+  font-weight: 500;
+}
+
+.board-container .modal-content .modal-meta-item {
+  color: #065f46;
+  font-weight: 500;
+}
+
+.board-container .modal-content .modal-meta-label {
+  font-weight: 600;
+  color: #064e3b;
+}
+
+/* 신청 버튼 스타일 */
+.apply-button {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  color: white;
+  box-shadow: 0 2px 4px rgba(59, 130, 246, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.apply-button::before {
+  content: "✋";
+  margin-right: 0.5rem;
+}
+
+.apply-button::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.apply-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(59, 130, 246, 0.4);
+}
+
+.apply-button:hover::after {
+  left: 100%;
+}
+
+/* 빈 상태 특별 스타일 */
+.board-container .empty-state {
+  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+  border: 2px dashed var(--color-success);
+  color: #064e3b;
+  position: relative;
+}
+
+.board-container .empty-state::before {
+  content: "🎯";
+  display: block;
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  opacity: 0.7;
+}
+
+.board-container .empty-state::after {
+  content: "첫 번째 스터디를 개설해보세요!";
+  display: block;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+  opacity: 0.8;
+}
+
+/* 로딩 상태 특별 스타일 */
+.board-container .loading-indicator {
+  background: linear-gradient(135deg, var(--color-success) 0%, #059669 100%);
+  color: white;
+  position: relative;
+}
+
+.board-container .loading-indicator::before {
+  content: "📢";
+  margin-right: 0.5rem;
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+/* 페이지네이션 특별 스타일 (MyStudyList.css 상속하면서 색상 변경) */
+.board-container .pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 3rem;
+  padding: 2rem 0;
+  border-top: 2px solid var(--color-border);
+}
+
+.board-container .pagination button {
+  min-width: 48px;
+  height: 48px;
+  border: 2px solid var(--color-border);
+  background: var(--color-background-card);
+  color: var(--color-text-secondary);
+  border-radius: var(--border-radius-md);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-ease);
+  position: relative;
+  overflow: hidden;
+}
+
+.board-container .pagination button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(16, 185, 129, 0.1), transparent); /* Success color with opacity */
+  transition: left 0.5s;
+}
+
+.board-container .pagination button:hover:not(:disabled) {
+  border-color: var(--color-success);
+  color: #064e3b;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.2);
+}
+
+.board-container .pagination button:hover:not(:disabled)::before {
+  left: 100%;
+}
+
+.board-container .pagination button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.board-container .pagination button.active-page {
+  background: linear-gradient(135deg, var(--color-success) 0%, #059669 100%);
+  color: white;
+  border-color: #059669;
+  box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.3);
+  transform: scale(1.1);
+}
+
+.board-container .pagination button.active-page::after {
+  content: "✓";
+  position: absolute;
+  top: -0.25rem;
+  right: -0.25rem;
+  width: 1rem;
+  height: 1rem;
+  background: #3b82f6; /* Blue checkmark */
+  color: white;
+  border-radius: 50%;
+  font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.board-container .pagination button.active-page:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 10px -2px rgba(16, 185, 129, 0.4);
+}
+
+/* 모달 액션 버튼들 간격 조정 */
+.board-container .modal-actions {
+  gap: 0.75rem;
+  padding-top: 1.5rem;
+  border-top: 2px solid #dcfce7;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .board-container .board-title {
+    font-size: 1.75rem;
+    padding-left: 3rem;
+  }
+
+  .board-container .board-title::before {
+    font-size: 2rem;
+  }
+
+  .board-container .posts-list {
+    grid-template-columns: 1fr; /* Single column on smaller screens */
+    gap: 1rem;
+  }
+
+  .board-container .post-item {
+    padding: 1.25rem;
+  }
+
+  .board-container .post-item::after {
+    font-size: 1.25rem;
+    top: 0.75rem;
+    right: 0.75rem;
+  }
+
+  .board-container .post-meta {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .search-bar {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 1rem;
+  }
+
+  .search-bar::before {
+    align-self: flex-start;
+    margin-bottom: 0.5rem;
+  }
+
+  .board-container .pagination {
+    flex-wrap: wrap;
+    gap: 0.25rem;
+  }
+
+  .board-container .pagination button {
+    min-width: 40px;
+    height: 40px;
+    font-size: 0.875rem;
+  }
+
+  .modal-content {
+    max-width: 90%; /* 모바일에서 모달 너비 조정 */
+    max-height: 80vh; /* 모바일에서 모달 높이 조정 */
+  }
+}
+
+@media (max-width: 480px) {
+  .board-container .board-title {
+    font-size: 1.5rem;
+    padding-left: 2.5rem;
+    text-align: center;
+  }
+
+  .board-container .board-title::before {
+    font-size: 1.5rem;
+    left: 50%;
+    top: -2rem;
+    transform: translateX(-50%);
+  }
+
+  .board-container .modal-content .modal-title {
+    font-size: 1.25rem;
+  }
+
+  .board-container .pagination button {
+    min-width: 36px;
+    height: 36px;
+    font-size: 0.75rem;
+  }
+}
+
+/* 접근성 개선 */
+.apply-button:focus,
+.board-container .pagination button:focus,
+.search-input:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* 다크모드 지원 */
+@media (prefers-color-scheme: dark) {
+  .board-container .post-item {
+    background: linear-gradient(135deg, #1a2e1a 0%, #22543d 100%);
+    border-image: linear-gradient(135deg, var(--color-success) 0%, #059669 100%) 1;
+  }
+
+  .board-container .post-item:hover {
+    background: linear-gradient(135deg, #22543d 0%, #2f855a 100%);
+  }
+
+  .board-container .post-meta {
+    background: linear-gradient(135deg, #22543d 0%, #2f855a 100%);
+    border-color: var(--color-success);
+  }
+
+  .board-container .post-meta span {
+    color: #d1fae5;
+  }
+
+  .board-container .modal-content {
+    background: linear-gradient(135deg, var(--color-background-card) 0%, #1a2e1a 100%);
+    border-color: var(--color-success);
+  }
+
+  .board-container .modal-content .modal-title {
+    color: #d1fae5;
+    border-color: #22543d;
+  }
+
+  .board-container .modal-content .modal-content-text {
+    color: #a7f3d0;
+  }
+
+  .board-container .empty-state {
+    background: linear-gradient(135deg, #1a2e1a 0%, #22543d 100%);
+    border-color: var(--color-success);
+    color: #d1fae5;
+  }
+
+  .board-container .pagination button {
+    background: var(--color-background-muted);
+    border-color: #22543d;
+    color: #d1fae5;
+  }
+
+  .board-container .pagination button:hover:not(:disabled) {
+    border-color: var(--color-success);
+    color: #f0fdf4;
+  }
+
+  .search-bar {
+    background: linear-gradient(135deg, var(--color-background-muted) 0%, var(--color-background-accent) 100%);
+    border-color: var(--color-border);
+  }
+
+  .search-bar::before {
+    color: var(--color-text-secondary);
+  }
+
+  .search-input {
+    background: var(--color-background-card);
+    border-color: var(--color-border);
+    color: var(--color-text-primary);
+  }
+
+  .search-input:focus {
+    background: var(--color-background-card);
+  }
+
+  .search-input::placeholder {
+    color: var(--color-text-muted);
+  }
+}
+
+/* 특별한 애니메이션 효과 */
+.board-container .post-item {
+  animation: slideInLeft 0.6s ease-out;
+  animation-fill-mode: both;
+}
+
+.board-container .post-item:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.board-container .post-item:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.board-container .post-item:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.board-container .post-item:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+.board-container .post-item:nth-child(5) {
+  animation-delay: 0.5s;
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* 스터디 개설 버튼 특별 효과 */
+.board-container .write-button {
+  animation: glow 3s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.3);
+  }
+  to {
+    box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.3), 0 0 20px rgba(16, 185, 129, 0.2);
+  }
+}
