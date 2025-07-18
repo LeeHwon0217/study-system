@@ -1,7 +1,3 @@
----
-
-## 📄 `README.md`
-
 ````markdown
 # 📝 Study-System (스터디 모집 게시판)
 
@@ -67,9 +63,9 @@
 ```bash
 cd backend
 ./gradlew bootRun
-````
+```
 
-> `application.properties` 또는 `.env`는 `.gitignore`로 제외되어 있습니다.
+> `application.properties` 또는 `.env`는 `.gitignore`로 제외되어 있습니다.  
 > 다음 정보를 직접 설정해주세요:
 
 ```properties
@@ -87,7 +83,7 @@ npm install
 npm run dev
 ```
 
-* 기본 실행 주소: [http://localhost:5173](http://localhost:5173)
+> 기본 실행 주소: [http://localhost:5173](http://localhost:5173)
 
 ---
 
@@ -120,14 +116,14 @@ npm run dev
 
 ## ⚠️ 주의 사항
 
-* `.gitignore`에는 `application.properties`, `.env`, `node_modules/`, `build/` 등 민감한 파일 제외 처리됨
-* `database.sql` 파일 포함
+- `.gitignore`에는 `application.properties`, `.env`, `node_modules/`, `build/` 등 민감한 파일 제외 처리됨
+- `database.sql` 파일 포함 (초기 데이터 및 테이블 구조 정의)
 
 ---
 
 ## 👨‍💻 개발자
 
-* 이 프로젝트는 **2025년 시험 과제**로 제출되었습니다.
-* 개발자: [이름 또는 GitHub ID](https://github.com/your-profile)
+- 이 프로젝트는 **2025년 시험 과제**로 제출되었습니다.
+- GitHub Repo: [study-system](https://github.com/LeeHwon0217/study-system)
 
-```
+````
